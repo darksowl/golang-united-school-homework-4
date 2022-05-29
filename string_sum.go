@@ -4,6 +4,7 @@ package string_sum
 
 import (
 	"errors"
+	//"reflect"
 	"fmt"
 	"strconv"
 	"strings"
@@ -51,7 +52,7 @@ func StringSum(input string) (output string, err error) {
 	//m[0] = strings.ReplaceAll(m[0], " ", "")
 	n[0], e = strconv.Atoi(m[0])
 	if e != nil {
-		return output, e
+		return output, fmt.Errorf("%w", e)
 	}
 	//fmt.Println(n[0],e)
 	m[1] = input[j:len(input)]
@@ -64,7 +65,7 @@ func StringSum(input string) (output string, err error) {
 	}
 	n[1], e = strconv.Atoi(m[1])
 	if e != nil {
-		return output, e
+		return output, fmt.Errorf("%w", e)
 	}
 	//fmt.Println(n[1],e)
 	sum := n[0] + n[1]
@@ -75,5 +76,11 @@ func StringSum(input string) (output string, err error) {
 //func main(){
 //	s := "24+55f"
 //	a,err := StringSum(s)
-//	fmt.Printf("%s,%v",a,err)
+//	fmt.Printf("%s,%v\n",a,err)
+
+//	e := errors.Unwrap(err)
+//	fmt.Printf("%v",e)
+	//if numerr, ok := e.(*strconv.NumError); !ok {
+	//	fmt.Printf("wrong type of error is wrapped into the returned error: got %s, want %s", reflect.TypeOf(e), reflect.TypeOf(numerr))
+	//}
 //}
