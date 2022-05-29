@@ -4,7 +4,7 @@ package string_sum
 
 import (
 	"errors"
-	//"fmt"
+	"fmt"
 	"strconv"
 	"strings"
 )
