@@ -36,18 +36,25 @@ func StringSum(input string) (output string, err error) {
 	var e error
 	m := make([]string, 2)
 	j := 0
+	input = strings.ReplaceAll(input, " ", "")
 	for i := 1; i < len(input); i++ {
 		if string(input[i]) == "+" || string(input[i]) == "-" {
 			m[0] = input[j:i]
 			j = i
 			break
+		} else {
+			return output, fmt.Errorf("%w", errorNotTwoOperands)
 		}
 	}
 	//fmt.Println(m[0])
-	n[0], e = strconv.Atoi(strings.ReplaceAll(m[0], " ", ""))
+	//m[0] = strings.ReplaceAll(m[0], " ", "")
+	n[0], e = strconv.Atoi(m[0])
+	if e != nil {
+		return output, fmt.Errorf("%w", e)
+	}
 	//fmt.Println(n[0],e)
 	m[1] = input[j:len(input)]
-	m[1] = strings.ReplaceAll(m[1], " ", "")
+	//m[1] = strings.ReplaceAll(m[1], " ", "")
 	//fmt.Println(m[1])
 	for i := 1; i < len(m[1]); i++ {
 		if string(m[1][i]) == "+" || string(m[1][i]) == "-" {
@@ -56,7 +63,7 @@ func StringSum(input string) (output string, err error) {
 	}
 	n[1], e = strconv.Atoi(m[1])
 	if e != nil {
-		return output, fmt.Errorf("%w", errorNotTwoOperands)
+		return output, fmt.Errorf("%w", e)
 	}
 	//fmt.Println(n[1],e)
 	sum := n[0] + n[1]
@@ -65,7 +72,7 @@ func StringSum(input string) (output string, err error) {
 }
 
 //func main(){
-//	s := "- 54321 - "
+//	s := "24"
 //	a,err := StringSum(s)
 //	fmt.Printf("%s,%v",a,err)
 //}
